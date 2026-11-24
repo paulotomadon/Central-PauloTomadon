@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0d17">
+<title>Central · PAULINHOGAMER376</title>
+<style>
+:root{--bg:#0b0d17;--card:#141828;--tx:#eef0ff;--mut:#8b93b8;--ac:#6c7bff;--ac2:#22d3ee;--ok:#34d399;--bad:#f87171;--bd:#262c48}
+*{box-sizing:border-box;margin:0}
+body{font:15px/1.5 system-ui,"Segoe UI",Roboto,sans-serif;color:var(--tx);min-height:100vh;background:radial-gradient(900px 500px at 8% -10%,#25307a66,transparent),radial-gradient(800px 500px at 100% 0,#0e749044,transparent),var(--bg)}
+a{color:inherit;text-decoration:none}
+.w{max-width:1200px;margin:0 auto;padding:24px 18px 60px}
+.mut{color:var(--mut)}
+.hero{display:flex;gap:22px;align-items:center;flex-wrap:wrap;background:linear-gradient(135deg,#1b2150cc,#0f3a4acc);border:1px solid var(--bd);border-radius:24px;padding:24px}
+.av{width:104px;height:104px;border-radius:50%;border:3px solid var(--ac);background:var(--card) center/cover}
+.hero .in{flex:1;min-width:240px}
+.hero h1{font-size:28px;line-height:1.2}
+.hero p{white-space:pre-line;max-height:4.5em;overflow:hidden;margin-top:6px;color:#c6cbea}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{background:#ffffff12;border:1px solid var(--bd);padding:3px 12px;border-radius:99px;font-size:13px}
+.stat{text-align:right;font-size:13px;color:var(--mut)}
+.stat b{color:var(--tx)}
+.pbar{height:4px;background:#ffffff18;border-radius:9px;margin-top:6px;overflow:hidden}.pbar i{display:block;height:100%;background:var(--ac2);transition:width 1s linear}
+button,select,input{font:inherit;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:8px 14px}
+button{cursor:pointer}button:hover{border-color:var(--ac)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:20px 0}
+.kpi{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px 16px}
+.kpi small{color:var(--mut)}.kpi strong{display:block;font-size:26px}
+.kpi svg{width:100%;height:24px;color:var(--ac2)}
+h2{font-size:21px;margin:34px 0 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+h2 .tools{margin-left:auto;display:flex;gap:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;overflow:hidden;transition:.2s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-4px);border-color:var(--ac);box-shadow:0 12px 30px #0006}
+.cov{aspect-ratio:16/9;background:#0008 center/cover;position:relative;cursor:pointer;overflow:hidden}
+.cov img{width:100%;height:100%;object-fit:cover;display:block}
+.live{position:absolute;left:10px;top:10px;background:#000b;backdrop-filter:blur(6px);padding:4px 11px;border-radius:99px;font-size:12px;font-weight:600;display:flex;gap:7px;align-items:center}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--mut)}
+.live.on i{background:var(--ok);animation:p 1.6s infinite}.live.off i{background:var(--bad)}
+@keyframes p{0%{box-shadow:0 0 0 0 var(--ok)}70%,100%{box-shadow:0 0 0 8px #0000}}
+@keyframes fl{from{color:var(--ac2);transform:scale(1.2)}}
+.live b{font-size:11px;animation:fl 1s}.up{color:var(--ok)}.dn{color:var(--bad)}
+.cnt{position:absolute;right:10px;bottom:10px;background:#000b;padding:1px 9px;border-radius:99px;font-size:11px}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.hd{display:flex;gap:12px;align-items:center}.hd img{width:46px;height:46px;border-radius:12px;background:#0006}
+.hd h3{font-size:16px;line-height:1.25}.hd small{color:var(--mut)}
+.desc{color:#b9bfe0;font-size:13.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.9em}
+.bar{height:6px;border-radius:9px;background:var(--bad);overflow:hidden}.bar span{display:block;height:100%;background:var(--ok)}
+.st{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--mut)}.st b{color:var(--tx)}
+.sp{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--mut)}.sp svg{flex:1;height:22px;color:var(--ac2)}
+.bt{display:flex;gap:8px;margin-top:auto;padding-top:4px}
+.btn{flex:1;text-align:center;padding:9px 10px;border-radius:12px;border:1px solid var(--bd);font-weight:600;font-size:14px;background:#ffffff0a}
+.btn:hover{border-color:var(--ac)}.pri{background:linear-gradient(135deg,var(--ac),var(--ac2));border:0;color:#04101c}
+.tags{display:flex;gap:6px;flex-wrap:wrap}.tags span{font-size:11px;background:#6c7bff22;color:#aab3ff;border-radius:99px;padding:1px 9px}
+#err{display:none;background:#f8717122;border:1px solid var(--bad);border-radius:12px;padding:10px 14px;margin-top:16px}
+footer{margin-top:40px;text-align:center;color:var(--mut);font-size:13px}
+#toasts{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:8px;z-index:9}.toast{background:var(--card);border:1px solid var(--ac2);border-radius:12px;padding:10px 14px;box-shadow:0 8px 24px #0008;animation:fl .4s;max-width:300px;font-size:14px}
+</style>
+</head>
+<body>
+<div class="w">
+  <header class="hero">
+    <div class="av" id="av"></div>
+    <div class="in">
+      <h1 id="nm">PAULINHOGAMER376</h1>
+      <small class="mut" id="un">@PAULINHOGAMER376 · Roblox</small>
+      <p id="bio"></p>
+      <div class="chips" id="chips"></div>
+    </div>
+    <div class="stat">
+      <div><span id="liveDot" class="up">●</span> Ao vivo · atualizado <b id="upd">–</b></div>
+      <div>Próxima em <b id="cd">0</b>s · via <span id="px">–</span></div>
+      <div class="pbar"><i id="pb" style="width:0"></i></div>
+      <button onclick="tick(1)" style="margin-top:10px">↻ Atualizar agora</button> <button onclick="setProxy()" title="Definir proxy próprio" style="margin-top:10px">⚙</button>
+      <div style="margin-top:8px"><button id="nb" onclick="toggleNotif()">🔕 Avisos: desligados</button> <button onclick="setLim()" title="Definir limites de jogadores">🎯</button></div>
+    </div>
+  </header>
+  <div id="err"></div>
+
+  <section class="kpis" id="kpis"></section>
+
+  <h2>🎮 Jogos no Roblox
+    <span class="tools">
+      <input id="q" placeholder="Buscar jogo…" oninput="render()">
+      <select id="sort" onchange="render()">
+        <option value="playing">Mais jogadores agora</option>
+        <option value="visits">Mais visitas</option>
+        <option value="fav">Mais favoritos</option>
+        <option value="upd">Atualizados recentemente</option>
+        <option value="name">Nome (A–Z)</option>
+      </select>
+    </span>
+  </h2>
+  <div class="grid" id="games"><p class="mut">Carregando jogos…</p></div>
+
+  <h2>🌐 Sites no GitHub Pages <small class="mut" id="siteInfo"></small></h2>
+  <div class="grid" id="sites"><p class="mut">Verificando sites…</p></div>
+
+  <footer>Painel estático, sem servidor próprio: dados direto das APIs públicas do Roblox e do GitHub. Clique na capa de um jogo para ver as outras imagens.</footer>
+</div>
+
+<div id="toasts"></div>
+<script>
+const CFG={uid:5571376994,gh:'paulotomadon',poll:20,
+  sites:['https://paulotomadon.github.io/MathQuiz/','https://paulotomadon.github.io/Nexus-P2P/']};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>n==null?'–':n>=1e9?(n/1e9).toFixed(1)+' bi':n>=1e6?(n/1e6).toFixed(1)+' mi':n>=1e4?(n/1e3).toFixed(1)+' mil':n.toLocaleString('pt-BR');
+const ago=d=>{const s=(Date.now()-new Date(d))/1e3;for(const[v,u,p]of[[31536e3,'ano','anos'],[2592e3,'mês','meses'],[86400,'dia','dias'],[3600,'h','h'],[60,'min','min']])if(s>=v){const n=Math.floor(s/v);return'há '+n+' '+(n>1?p:u)}return'agora'};
+const spark=a=>{if(a.length<2)return'';const mx=Math.max(...a),mn=Math.min(...a),r=mx-mn||1;return`<svg viewBox="0 0 100 24" preserveAspectRatio="none"><polyline fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke" points="${a.map((v,i)=>(i/(a.length-1)*100).toFixed(1)+','+(22-(v-mn)/r*20).toFixed(1)).join(' ')}"/></svg>`};
+
+/* ---------- Acesso às APIs do Roblox (CORS): corrida entre vários proxies públicos ---------- */
+const LS={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{v?localStorage.setItem(k,v):localStorage.removeItem(k)}catch(e){}}};
+const P=[['RoProxy',u=>u.replace('roblox.com','roproxy.com')],
+  ['FF-RoProxy',u=>u.replace('roblox.com','ff-roproxy.com')],
+  ['RoTunnel',u=>u.replace('roblox.com','rotunnel.com')],
+  ['CorsProxy',u=>'https://corsproxy.io/?url='+encodeURIComponent(u)],
+  ['CodeTabs',u=>'https://api.codetabs.com/v1/proxy/?quest='+encodeURIComponent(u)],
+  ['AllOrigins',u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u)]];
+const cp=LS.get('proxy');if(cp)P.unshift(['Personalizado',u=>cp+encodeURIComponent(u)]);
+function setProxy(){const v=prompt('Proxy próprio (opcional), ex.: https://meu-worker.workers.dev/?url=\nDeixe vazio para remover.',cp||'');if(v!==null){LS.set('proxy',v.trim());location.reload()}}
+let pi=0;const LOG={};
+const tf=async(u,ms=9000)=>{const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);
+  try{const r=await fetch(u,{cache:'no-store',signal:c.signal});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json()}finally{clearTimeout(t)}};
+async function rb(u){
+  const T=i=>tf(P[i][1](u)).then(j=>{pi=i;LOG[P[i][0]]='ok';$('#px').textContent=P[i][0];return j},
+    e=>{LOG[P[i][0]]=e.name=='AbortError'?'tempo esgotado':(e.message||'falhou');throw e});
+  try{return await T(pi)}catch(e){}
+  return await Promise.any(P.map((_,i)=>i==pi?Promise.reject(0):T(i)));
+}
+
+/* ---------- Avisos: alguém entrou (0 → 1+) ou passou de limites ---------- */
+const NT={on:LS.get('notif')=='1',lim:(LS.get('lim')||'5,10,25,50,100,250,500,1000').split(',').map(Number).filter(n=>n>0).sort((a,b)=>a-b),seen:{}};
+function toast(t,b){const d=document.createElement('div');d.className='toast';d.innerHTML=`<b>${esc(t)}</b><br>${esc(b)}`;$('#toasts').appendChild(d);setTimeout(()=>d.remove(),9000)}
+function beep(){try{const c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.setValueAtTime(.15,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.4);o.start();o.stop(c.currentTime+.4)}catch(e){}}
+function alertUser(t,b){toast(t,b);beep();if('Notification' in window&&Notification.permission=='granted')try{new Notification(t,{body:b,tag:t+b})}catch(e){}}
+function check(g){
+  if(!NT.on||g.prev==null)return;
+  const p=g.prev,n=g.playing,k=Date.now();
+  const fire=(key,t,b)=>{if(k-(NT.seen[key]||0)<3e5)return;NT.seen[key]=k;alertUser(t,b)};
+  if(p===0&&n>0)fire(g.id+'z','Alguém entrou!',`${g.name}: de 0 para ${n} jogando`);
+  else{const l=NT.lim.filter(x=>p<x&&n>=x).pop();if(l)fire(g.id+'l'+l,`🔥 ${l}+ jogadores`,`${g.name}: ${n} jogando agora`)}
+}
+async function toggleNotif(){
+  if(!NT.on){
+    if('Notification' in window&&Notification.permission=='default')try{await Notification.requestPermission()}catch(e){}
+    NT.on=true;LS.set('notif','1');alertUser('Avisos ativados','Você será avisado quando alguém entrar num jogo vazio ou os jogadores passarem dos limites.');
+  }else{NT.on=false;LS.set('notif','')}
+  $('#nb').textContent=NT.on?'🔔 Avisos: ligados':'🔕 Avisos: desligados';
+}
+function setLim(){const v=prompt('Avisar ao passar de quantos jogadores? (números separados por vírgula)',NT.lim.join(', '));
+  if(v!==null){const a=v.split(',').map(x=>parseInt(x)).filter(n=>n>0);if(a.length){NT.lim=a.sort((x,y)=>x-y);LS.set('lim',a.join(','))}}}
+
+/* ---------- Perfil ---------- */
+let prof=0;
+async function loadProfile(){
+  const U=CFG.uid;
+  const [u,h,f,fr,fg]=await Promise.all([
+    rb(`https://users.roblox.com/v1/users/${U}`),
+    rb(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${U}&size=150x150&format=Png`).catch(()=>null),
+    rb(`https://friends.roblox.com/v1/users/${U}/followers/count`).catch(()=>({})),
+    rb(`https://friends.roblox.com/v1/users/${U}/friends/count`).catch(()=>({})),
+    rb(`https://friends.roblox.com/v1/users/${U}/followings/count`).catch(()=>({}))]);
+  $('#nm').textContent=u.displayName+(u.hasVerifiedBadge?' ✔':'');
+  $('#un').textContent='@'+u.name+' · Roblox · ID '+U;
+  $('#bio').textContent=u.description||'';
+  const im=h?.data?.[0]?.imageUrl;if(im)$('#av').style.backgroundImage=`url("${im}")`;
+  $('#chips').innerHTML=[`👥 ${fmt(f.count)} seguidores`,`🤝 ${fmt(fr.count)} amigos`,`➕ ${fmt(fg.count)} seguindo`,`📅 Conta criada em ${new Date(u.created).toLocaleDateString('pt-BR')}`]
+    .map(t=>`<span class="chip">${t}</span>`).join('')+`<a class="chip" href="https://www.roblox.com/pt/users/${U}/profile" target="_blank" rel="noopener">Ver perfil ↗</a>`;
+  prof=1;
+}
+
+/* ---------- Jogos ---------- */
+const G={},TH=[];
+async function loadGames(){
+  const l=await rb(`https://games.roblox.com/v2/users/${CFG.uid}/games?accessFilter=2&sortOrder=Asc&limit=50`);
+  l.data.forEach(x=>G[x.id]={id:x.id,name:x.name,desc:x.description,place:x.rootPlace?.id,ti:0,thumbs:[],hist:[]});
+  const ids=Object.keys(G).join(',');if(!ids)return;
+  const [ic,th]=await Promise.all([
+    rb(`https://thumbnails.roblox.com/v1/games/icons?universeIds=${ids}&returnPolicy=PlaceHolder&size=256x256&format=Png&isCircular=false`).catch(()=>({data:[]})),
+    rb(`https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=${ids}&countPerUniverse=5&size=768x432&format=Png&isCircular=false`).catch(()=>({data:[]}))]);
+  ic.data.forEach(x=>G[x.targetId]&&(G[x.targetId].icon=x.imageUrl));
+  th.data.forEach(x=>G[x.universeId]&&(G[x.universeId].thumbs=x.thumbnails.map(t=>t.imageUrl).filter(Boolean)));
+}
+async function pollGames(){
+  const ids=Object.keys(G).join(',');if(!ids)return;
+  const [d,v]=await Promise.all([rb(`https://games.roblox.com/v1/games?universeIds=${ids}`),
+    rb(`https://games.roblox.com/v1/games/votes?universeIds=${ids}`).catch(()=>({data:[]}))]);
+  d.data.forEach(x=>{const g=G[x.id];if(!g)return;g.prev=g.playing;
+    Object.assign(g,{playing:x.playing,visits:x.visits,fav:x.favoritedCount,max:x.maxPlayers,genre:x.genre,upd:x.updated,cr:x.created,place:g.place||x.rootPlaceId});
+    g.hist=g.hist.concat(x.playing).slice(-40);g.peak=Math.max(g.peak||0,x.playing);check(g)});
+  v.data.forEach(x=>{if(G[x.id]){G[x.id].up=x.upVotes;G[x.id].down=x.downVotes}});
+  const tot=Object.values(G).reduce((a,g)=>a+(g.playing||0),0);TH.push(tot);if(TH.length>60)TH.shift();
+  document.title=`(${tot}) Central · PAULINHOGAMER376`;
+}
+function nx(id){const g=G[id];if(g.thumbs.length)g.ti=(g.ti+1)%g.thumbs.length;render()}
+function card(g){
+  const t=(g.up||0)+(g.down||0),pc=t?Math.round(g.up/t*100):null,d=g.prev!=null?g.playing-g.prev:0,img=g.thumbs[g.ti]||g.icon||'';
+  const url=`https://www.roblox.com/games/${g.place}`;
+  return`<article class="card"><div class="cov" onclick="nx('${g.id}')" title="Clique para ver outra imagem">${img?`<img src="${esc(img)}" alt="" loading="lazy">`:''}
+  <span class="live ${g.playing>0?'on':''}"><i></i>${g.playing==null?'–':g.playing.toLocaleString('pt-BR')} jogando${d?` <b class="${d>0?'up':'dn'}">${d>0?'▲':'▼'}${Math.abs(d)}</b>`:''}</span>
+  ${g.thumbs.length>1?`<span class="cnt">${g.ti+1}/${g.thumbs.length}</span>`:''}</div>
+  <div class="body"><div class="hd">${g.icon?`<img src="${esc(g.icon)}" alt="">`:''}<div><h3>${esc(g.name)}</h3><small>${esc(g.genre||'')}${g.upd?' · atualizado '+ago(g.upd):''}</small></div></div>
+  <p class="desc">${esc(g.desc||'Sem descrição.')}</p>
+  ${pc!=null?`<div class="bar" title="${pc}% de aprovação"><span style="width:${pc}%"></span></div>`:''}
+  <div class="st">${pc!=null?`<span>👍 <b>${pc}%</b></span>`:''}<span>👁 <b>${fmt(g.visits)}</b></span><span>⭐ <b>${fmt(g.fav)}</b></span><span>👥 máx <b>${g.max??'–'}</b></span></div>
+  <div class="sp">Pico na sessão: <b>${g.peak??'–'}</b>${spark(g.hist)}</div>
+  <div class="bt"><a class="btn pri" href="${url}" target="_blank" rel="noopener">▶ Jogar</a><a class="btn" href="roblox://experiences/start?placeId=${g.place}">App</a><a class="btn" href="${url}" target="_blank" rel="noopener">Página</a></div></div></article>`;
+}
+function render(){
+  const q=$('#q').value.toLowerCase(),s=$('#sort').value,a=Object.values(G).filter(g=>g.name.toLowerCase().includes(q));
+  a.sort((x,y)=>s=='name'?x.name.localeCompare(y.name):s=='upd'?new Date(y.upd)-new Date(x.upd):(y[s]||0)-(x[s]||0));
+  $('#games').innerHTML=a.map(card).join('')||'<p class="mut">Nenhum jogo encontrado.</p>';
+  const A=Object.values(G),tot=A.reduce((s,g)=>s+(g.playing||0),0),on=Object.values(S).filter(x=>x.ok).length;
+  $('#kpis').innerHTML=[
+    ['Jogadores agora',`<strong>${tot.toLocaleString('pt-BR')}</strong>${spark(TH)}`],
+    ['Jogos publicados',`<strong>${A.length}</strong>`],
+    ['Visitas totais',`<strong>${fmt(A.reduce((s,g)=>s+(g.visits||0),0))}</strong>`],
+    ['Favoritos',`<strong>${fmt(A.reduce((s,g)=>s+(g.fav||0),0))}</strong>`],
+    ['Sites online',`<strong>${on}/${Object.keys(S).length}</strong>`]].map(k=>`<div class="kpi"><small>${k[0]}</small>${k[1]}</div>`).join('');
+}
+
+/* ---------- Sites do GitHub Pages ---------- */
+const S={};
+const repoOf=u=>{const x=new URL(u);return{own:x.host.split('.')[0],repo:x.pathname.split('/')[1]||x.host}};
+const addSite=u=>S[u]||(S[u]={url:u,...repoOf(u)});
+async function discover(){
+  try{const r=await fetch(`https://api.github.com/users/${CFG.gh}/repos?per_page=100&sort=pushed`);if(!r.ok)throw 0;
+    (await r.json()).filter(x=>x.has_pages).forEach(x=>{const u=x.homepage&&x.homepage.includes('github.io')?x.homepage:`https://${CFG.gh}.github.io/${x.name==CFG.gh+'.github.io'?'':x.name+'/'}`;addSite(u).gh=x});
+  }catch(e){}
+  for(const s of Object.values(S))if(!s.gh)try{const r=await fetch(`https://api.github.com/repos/${s.own}/${s.repo}`);if(r.ok)s.gh=await r.json()}catch(e){}
+}
+async function meta(s){
+  let h='';
+  try{h=await(await fetch(s.url,{cache:'no-store'})).text()}catch(e){try{h=await(await fetch('https://corsproxy.io/?url='+encodeURIComponent(s.url))).text()}catch(e2){}}
+  try{const d=new DOMParser().parseFromString(h,'text/html'),m=n=>d.querySelector(`meta[property="${n}"],meta[name="${n}"]`)?.content;
+    s.title=m('og:title')||d.title;s.desc=m('og:description')||m('description');const im=m('og:image');s.img=im&&new URL(im,s.url).href}catch(e){}
+  s.meta=1;
+}
+async function checkSite(s){
+  const t=performance.now();
+  try{const r=await fetch(s.url,{cache:'no-store'});s.ok=r.ok;s.ms=Math.round(performance.now()-t)}
+  catch(e){try{await fetch(s.url,{mode:'no-cors',cache:'no-store'});s.ok=true;s.ms=Math.round(performance.now()-t)}catch(e2){s.ok=false}}
+  s.chk=Date.now();if(!s.meta)await meta(s);
+}
+function siteCard(s){
+  const g=s.gh||{},ms=`https://s.wordpress.com/mshots/v1/${encodeURIComponent(s.url)}?w=800&h=450`;
+  return`<article class="card"><div class="cov" onclick="window.open('${s.url}','_blank')"><img src="${esc(s.img||ms)}" alt="" loading="lazy" onerror="this.onerror=null;this.src='${ms}'">
+  <span class="live ${s.ok?'on':'off'}"><i></i>${s.ok==null?'verificando…':s.ok?'Online · '+s.ms+' ms':'Offline'}</span></div>
+  <div class="body"><div class="hd"><div><h3>${esc(s.title||g.name||s.repo)}</h3><small>${esc(s.own)}/${esc(s.repo)}${g.language?' · '+esc(g.language):''}</small></div></div>
+  <p class="desc">${esc(s.desc||g.description||'Sem descrição.')}</p>
+  ${g.topics?.length?`<div class="tags">${g.topics.map(t=>`<span>${esc(t)}</span>`).join('')}</div>`:''}
+  <div class="st"><span>⭐ <b>${g.stargazers_count??'–'}</b></span><span>⑂ <b>${g.forks_count??'–'}</b></span><span>🐞 <b>${g.open_issues_count??'–'}</b></span>${g.pushed_at?`<span>🕒 commit ${ago(g.pushed_at)}</span>`:''}</div>
+  <div class="bt"><a class="btn pri" href="${s.url}" target="_blank" rel="noopener">Entrar ↗</a>${g.html_url?`<a class="btn" href="${g.html_url}" target="_blank" rel="noopener">Repositório</a>`:''}</div></div></article>`;
+}
+function renderSites(){
+  $('#sites').innerHTML=Object.values(S).map(siteCard).join('');
+  const l=Math.max(0,...Object.values(S).map(s=>s.chk||0));$('#siteInfo').textContent=l?'· checado às '+new Date(l).toLocaleTimeString('pt-BR'):'';
+  render();
+}
+let lastDisc=0;
+async function tickSites(){
+  if(Date.now()-lastDisc>6e5){lastDisc=Date.now();await discover()}
+  renderSites();
+  await Promise.all(Object.values(S).map(checkSite));
+  renderSites();
+}
+
+/* ---------- Loop principal ---------- */
+let next=0,busy=0;
+async function tick(force){
+  if(busy)return;busy=1;next=Date.now()+CFG.poll*1e3;
+  try{
+    if(!prof)await loadProfile().catch(()=>{});
+    if(!Object.keys(G).length)await loadGames();
+    await pollGames();render();$('#err').style.display='none';
+    $('#upd').textContent=new Date().toLocaleTimeString('pt-BR');$('#liveDot').className='up';
+    if(!Object.keys(G).length)$('#games').innerHTML='<p class="mut">Nenhum jogo público encontrado para este usuário.</p>';
+  }catch(e){
+    $('#liveDot').className='dn';
+    $('#err').style.display='block';$('#err').innerHTML='Não foi possível acessar a API do Roblox agora. Tentando de novo automaticamente…<br><small class="mut">Diagnóstico: '+Object.entries(LOG).map(([k,v])=>k+' → '+v).join(' · ')+'</small>';
+  }
+  busy=0;
+}
+CFG.sites.forEach(addSite);
+setInterval(()=>{const s=Math.max(0,Math.round((next-Date.now())/1e3));$('#cd').textContent=s;$('#pb').style.width=(100-s/CFG.poll*100)+'%';if(Date.now()>=next)tick()},1000);
+setInterval(tickSites,6e4);
+$("#nb").textContent=NT.on?"🔔 Avisos: ligados":"🔕 Avisos: desligados";
+tick();tickSites();
+</script>
+</body>
+</html>
