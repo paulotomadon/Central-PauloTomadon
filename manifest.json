@@ -1,0 +1,27 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Central PauloTomadon",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Central",
+  "start_url": "/",
+  "theme_color": "#0b0d17",
+  "icons": [
+    {
+      "src": "https://paulotomadon.github.io/Central-PauloTomadon/tumbnail.jpg",
+      "type": "image/jpeg",
+      "sizes": "2048x2048",
+      "isSquare": true,
+      "isPng": false,
+      "isWebp": false,
+      "isJpg": true,
+      "width": 2048,
+      "is512x512": false,
+      "is256x256": false,
+      "is192x192": false
+    }
+  ],
+  "description": "Minha central com meus jogos e sites."
+}
