@@ -6,6 +6,10 @@
 <meta name="theme-color" content="#0b0d17">
 <title>Central · PAULINHOGAMER376</title>
 <link rel="icon" type="image/jpeg" href="tumbnail.jpg">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192x192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <style>
 :root{--bg:#0b0d17;--card:#141828;--tx:#eef0ff;--mut:#8b93b8;--ac:#6c7bff;--ac2:#22d3ee;--ok:#34d399;--bad:#f87171;--bd:#262c48}
 *{box-sizing:border-box;margin:0}
@@ -54,6 +58,20 @@ h2 .tools{margin-left:auto;display:flex;gap:8px}
 .btn{flex:1;text-align:center;padding:9px 10px;border-radius:12px;border:1px solid var(--bd);font-weight:600;font-size:14px;background:#ffffff0a}
 .btn:hover{border-color:var(--ac)}.pri{background:linear-gradient(135deg,var(--ac),var(--ac2));border:0;color:#04101c}
 .tags{display:flex;gap:6px;flex-wrap:wrap}.tags span{font-size:11px;background:#6c7bff22;color:#aab3ff;border-radius:99px;padding:1px 9px}
+.ap{background:linear-gradient(135deg,#1b2150cc,#0f3a4acc);border:1px solid var(--bd);border-radius:24px;padding:20px}
+.apt{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.apt button{border-radius:99px;padding:6px 14px;font-size:14px}
+.apt button.on{border-color:var(--ac);background:#6c7bff33}
+.apt em{font-style:normal;font-size:11px;background:var(--ok);color:#04101c;border-radius:99px;padding:0 8px;margin-left:6px;font-weight:700}
+.apm{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.apm>img{width:84px;height:84px;border-radius:20px;box-shadow:0 8px 24px #0006}
+.apm .tx{flex:1;min-width:260px}
+.apm h3{font-size:20px;line-height:1.25}
+.apm p{color:#c6cbea;margin-top:4px}
+.apm ol{margin:12px 0 0 20px;color:#c6cbea;display:grid;gap:4px;font-size:14px}
+.apm .bt{margin-top:16px;max-width:480px;flex-wrap:wrap}
+.apm .bt .btn{min-width:170px;cursor:pointer}
+.apm .note{margin-top:12px;font-size:13px;color:var(--mut)}
 #err{display:none;background:#f8717122;border:1px solid var(--bad);border-radius:12px;padding:10px 14px;margin-top:16px}
 footer{margin-top:40px;text-align:center;color:var(--mut);font-size:13px}
 #toasts{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:8px;z-index:9}.toast{background:var(--card);border:1px solid var(--ac2);border-radius:12px;padding:10px 14px;box-shadow:0 8px 24px #0008;animation:fl .4s;max-width:300px;font-size:14px}
@@ -80,6 +98,11 @@ footer{margin-top:40px;text-align:center;color:var(--mut);font-size:13px}
   <div id="err"></div>
 
   <section class="kpis" id="kpis"></section>
+
+  <section id="app">
+    <h2>📲 Baixar o app</h2>
+    <div class="ap"><div class="apt" id="apt"></div><div class="apm" id="apm"></div></div>
+  </section>
 
   <h2>🎮 Jogos no Roblox
     <span class="tools">
@@ -284,6 +307,45 @@ async function tick(force){
   }
   busy=0;
 }
+/* ---------- Baixar o app (APK / PWA) ---------- */
+const APK='android/app-release.apk';
+const UA=navigator.userAgent;
+const APP_ON=matchMedia('(display-mode: standalone)').matches||navigator.standalone||document.referrer.startsWith('android-app://');
+const ME=/android/i.test(UA)?'android':(/iphone|ipad|ipod/i.test(UA)||(/mac/i.test(navigator.platform||'')&&navigator.maxTouchPoints>1))?'ios':'desktop';
+const BR=/edg\//i.test(UA)?'edge':/firefox|fxios/i.test(UA)?'firefox':/chrome|crios|chromium/i.test(UA)?'chrome':/safari/i.test(UA)?'safari':'outro';
+const OS=/windows/i.test(UA)?'Windows':/cros/i.test(UA)?'ChromeOS':/mac/i.test(UA)?'macOS':/linux/i.test(UA)?'Linux':'computador';
+let dp=null,apTab=ME,apSize='';
+const TABS=[['android','🤖 Android'],['ios','🍎 iPhone / iPad'],['desktop','💻 Computador']];
+function apInfo(t){
+  if(t=='android')return{title:'Central PauloTomadon para Android',txt:'Baixe o aplicativo (APK) e instale no celular ou tablet.',
+    btns:`<a class="btn pri" href="${APK}" download>⬇ Baixar APK${apSize?' · '+apSize:''}</a>`+(dp?`<button class="btn" onclick="apInstall()">Instalar como PWA</button>`:''),
+    steps:['Toque em “Baixar APK” (se o Chrome avisar sobre o tipo de arquivo, escolha “Baixar mesmo assim”).','Abra o arquivo baixado pela notificação ou pelo app Arquivos/Downloads.','Se pedir, permita “Instalar apps desconhecidos” para o navegador que você está usando.','Toque em Instalar e depois em Abrir.'],
+    note:ME=='android'?'':'Abra esta página no seu Android para instalar o APK direto no aparelho.'};
+  if(t=='ios')return{title:'Central PauloTomadon para iPhone e iPad',txt:'O iOS não instala arquivos APK. Instale como app pela tela de início, direto do navegador.',
+    btns:`<button class="btn pri" onclick="apCopy()">🔗 Copiar link da página</button>`,
+    steps:['Abra esta página no Safari.','Toque no botão Compartilhar (quadrado com seta para cima).','Escolha “Adicionar à Tela de Início”.','Toque em Adicionar. O ícone da Central aparece junto dos seus apps.'],
+    note:'Em outros navegadores do iOS a opção pode não aparecer: use o Safari.'};
+  const ch=BR=='chrome'||BR=='edge';
+  const st=ch?['Clique no ícone de instalar (monitor com seta) no fim da barra de endereço.','Ou abra o menu ⋮ e escolha “Instalar Central PauloTomadon” (no Chrome: Transmitir, salvar e compartilhar → Instalar página como app).','Confirme em Instalar. O app abre em janela própria e ganha atalho.']
+    :BR=='safari'?['No Safari 17 ou mais novo, abra o menu Arquivo → Adicionar ao Dock.','Confirme em Adicionar. O app abre em janela própria.']
+    :BR=='firefox'?['O Firefox não instala sites como app no computador.','Abra esta página no Chrome ou no Edge e use o botão “Instalar app”.']
+    :['Abra esta página no Chrome ou no Edge e use o botão “Instalar app”.'];
+  return{title:'Central PauloTomadon para '+(ME=='desktop'?OS:'computador'),txt:'Instale como aplicativo de computador: abre em janela própria, sem barra de endereço.',
+    btns:dp?`<button class="btn pri" onclick="apInstall()">⬇ Instalar app</button>`:'',steps:st,note:dp?'':'O botão de instalar aparece aqui quando o navegador libera a instalação.'};
+}
+function renderApp(){
+  if(APP_ON){$('#app').style.display='none';return}
+  $('#apt').innerHTML=TABS.map(([k,n])=>`<button class="${k==apTab?'on':''}" onclick="apTab='${k}';renderApp()">${n}${k==ME?'<em>seu dispositivo</em>':''}</button>`).join('');
+  const i=apInfo(apTab);
+  $('#apm').innerHTML=`<img src="icons/icon-192x192.png" alt="" onerror="this.style.display='none'"><div class="tx"><h3>${i.title}</h3><p>${i.txt}</p>${i.btns?`<div class="bt">${i.btns}</div>`:''}<ol>${i.steps.map(s=>`<li>${s}</li>`).join('')}</ol>${i.note?`<div class="note">${i.note}</div>`:''}</div>`;
+}
+async function apInstall(){if(!dp)return;dp.prompt();try{await dp.userChoice}catch(e){}dp=null;renderApp()}
+async function apCopy(){try{await navigator.clipboard.writeText(location.href.split('#')[0]);toast('Link copiado','Cole no Safari para instalar.')}catch(e){prompt('Copie o link:',location.href)}}
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;renderApp()});
+addEventListener('appinstalled',()=>{dp=null;toast('App instalado','A Central PauloTomadon foi instalada.');renderApp()});
+fetch(APK,{method:'HEAD'}).then(r=>{const n=+r.headers.get('content-length');if(r.ok&&n){apSize=(n/1048576).toFixed(1).replace('.',',')+' MB';renderApp()}}).catch(()=>{});
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+renderApp();
 CFG.sites.forEach(addSite);
 setInterval(()=>{const s=Math.max(0,Math.round((next-Date.now())/1e3));$('#cd').textContent=s;$('#pb').style.width=(100-s/CFG.poll*100)+'%';if(Date.now()>=next)tick()},1000);
 setInterval(tickSites,6e4);

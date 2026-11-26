@@ -1,27 +1,56 @@
 {
-  "background_color": "#ffffff",
-  "dir": "ltr",
-  "display": "standalone",
   "name": "Central PauloTomadon",
-  "orientation": "any",
-  "scope": "/",
   "short_name": "Central",
-  "start_url": "/",
-  "theme_color": "#0b0d17",
+  "description": "Minha central para meus jogos e sites.",
+  "start_url": "https://paulotomadon.github.io/Central-PauloTomadon/",
+  "scope": "https://paulotomadon.github.io/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#6366F1",
+  "background_color": "#0A0F1C",
   "icons": [
     {
-      "src": "https://paulotomadon.github.io/Central-PauloTomadon/tumbnail.png",
-      "type": "image/jpeg",
-      "sizes": "2048x2048",
-      "isSquare": true,
-      "isPng": false,
-      "isWebp": false,
-      "isJpg": true,
-      "width": 2048,
-      "is512x512": false,
-      "is256x256": false,
-      "is192x192": false
+      "src": "icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "description": "Minha central com meus jogos e sites."
+  "id": "https://paulotomadon.github.io/Central-PauloTomadon/"
 }
